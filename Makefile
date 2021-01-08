@@ -5,7 +5,7 @@ SRC_DIR = src
 OBJ_DIR = bin
 TST_DIR = tests
 
-SRC = $(wildcard $(SRC_DIR)/*.c*)
+SRC = $(wildcard $(SRC_DIR)/*.cc)
 OBJ = $(SRC:$(SRC_DIR)/%.cc=$(OBJ_DIR)/%.o)
 
 SAVES = $(wildcard *.txt)
