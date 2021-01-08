@@ -1,0 +1,21 @@
+CC = g++
+CCFLAGS = -Wall -Werror -std=c++11 -g
+SRC_DIR = ../src/
+SRC = $(wildcard $(SRC_DIR)*.cc)
+OBJ_DIR = ../obj/
+OBJ = $(SRC:$(SRC_DIR)%.cc=$(OBJ_DIR)%.o)
+TST = $(wildcard *.cc)
+OBJ_TEST = $(filter-out $(OBJ_DIR)main.o, $(OBJ)) $(TST:%.cc=%.o)
+
+
+testcase: $(OBJ_TEST)
+	$(CC) $(CCFLAGS)  -o $@ $^
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cc
+	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
+
+%.o: %.cc
+	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
+
+clean:
+	rm -f $(OBJ_TEST) testcase
