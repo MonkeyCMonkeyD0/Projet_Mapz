@@ -1,12 +1,13 @@
 CC = g++
 CCFLAGS = -Wall -Werror -std=c++11 -g
+LIBFLAGS = 
 
 SRC_DIR = src
 OBJ_DIR = bin
 TST_DIR = tests
 
-SRC = $(wildcard $(SRC_DIR)/*.cc)
-OBJ = $(SRC:$(SRC_DIR)/%.cc=$(OBJ_DIR)/%.o)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 SAVES = $(wildcard *.txt)
 EXEC = main
@@ -20,7 +21,7 @@ testcase:
 $(EXEC): $(OBJ)
 	$(CC) $(CCFLAGS) $(LIBFLAGS) $^ -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cc
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CCFLAGS) -o $@ -c $<
 
