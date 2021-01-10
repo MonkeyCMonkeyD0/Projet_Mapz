@@ -2,6 +2,8 @@
 #ifndef TERRAIN_HPP
 #define TERRAIN_HPP
 
+#include <random>
+
 #include "Point.hpp"
 #include "Surface.hpp"
 
@@ -13,8 +15,9 @@ public:
 	Terrain (const Terrain& terrain) : Surface(terrain) {}
 
 private:
-	unsigned int generate_terrain(const Point&);
-	unsigned int height_limit = 100;
+	unsigned int (*generate_terrain) (const Point&);
+	// unsigned int height_limit = 100;
+
 };
 
 #endif
