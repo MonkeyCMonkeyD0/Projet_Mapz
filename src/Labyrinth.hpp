@@ -15,7 +15,7 @@ public:
 
 private:
 	unsigned int generate_labyrinth(const Point&);
-	unsigned int wall_height = 1000;
+	static unsigned int wall_height;
 
 };
 

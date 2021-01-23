@@ -24,6 +24,7 @@ public:
 	std::ostream& print (std::ostream&) const;
 	std::ostream& save (std::ostream&) const;
 	std::pair<std::size_t,std::size_t> get_size() const;
+	void set_value(const Point&, T);
 
 protected:
 	void populate (T (*func) (const Point&));
@@ -77,7 +78,11 @@ T& Grid<T>::operator() (const Point& p)
 template<typename T>
 T Grid<T>::operator() (const Point& p) const
 {
-	return this->operator()(p);
+	if (p.get().first >= this->nbColumn || p.get().second >= this->nbLine){
+		std::cerr << "error: Array index out of bounds" << std::endl;
+		exit(1);
+	}
+	return this->grid[p.get().first][p.get().second];
 }
 
 
@@ -86,7 +91,7 @@ std::ostream& Grid<T>::print(std::ostream& out) const
 {
 	for (std::size_t j = 0; j < this->nbLine; ++j) {
 		for (std::size_t i = 0; i < this->nbColumn; ++i)
-			out << (*this)(i,j) << " ";
+			out << (*this)(Point(i,j)) << " ";
 		out << std::endl;
 	}
 	return out;
@@ -104,6 +109,13 @@ template<typename T>
 std::pair<std::size_t,std::size_t> Grid<T>::get_size() const
 {
 	return std::make_pair(this->nbColumn, this->nbLine);
+}
+
+
+template<typename T>
+void Grid<T>::set_value(const Point& p, T val)
+{
+	(*this)(p) = val;
 }
 
 

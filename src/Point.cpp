@@ -81,3 +81,8 @@ std::ostream& Point::print(std::ostream& out) const
 {
 	return out << '(' << this->point.first << ',' << this->point.second << ')';
 }
+
+double Point::dist(const Point& p) const
+{
+	return sqrt(pow(p.get().first-this->get().first,2)+pow(p.get().second-this->get().second,2));
+}

@@ -3,6 +3,7 @@
 #define POINT_HPP
 
 #include <iostream>
+#include <cmath>
 
 
 class Point {
@@ -24,10 +25,10 @@ public:
 	void set (const std::pair<std::size_t,std::size_t>);
 	void set (const Point&);
 	std::ostream& print(std::ostream&) const;
+	double dist(const Point&) const;
 
 private:
 	std::pair<std::size_t,std::size_t> point;
-
 
 };
 

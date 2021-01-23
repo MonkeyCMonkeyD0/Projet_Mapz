@@ -1,12 +1,15 @@
 #include "../src/Point.hpp"
 #include "../src/Grid.hpp"
 #include "../src/Surface.hpp"
+#include "../src/Landscape.hpp"
 
 #include <random>
+#include <ctime>
 
 
 int main(int argc, char const *argv[])
 {
+	// -------------------- TEST POINT --------------------
 	// Point p1(2,3);
 	// p1.print(std::cout << std::endl);
 
@@ -32,11 +35,39 @@ int main(int argc, char const *argv[])
 	// std::cout << "delta height = " << s1.get_delta_height(p1,Point(10,5)) << std::endl;
 	// std::cout << "delta height = " << s1.get_delta_height(Point(10,5),p1) << std::endl;
 
-	std::default_random_engine gene;
-	std::normal_distribution<float> distribution(20,10.0);
-	for (int i = 0; i < 100; ++i)
-		std::cout << distribution(gene) << " ";
-	
+
+	// -------------------- TEST --------------------
+	// std::default_random_engine gene(std::chrono::system_clock::now().time_since_epoch().count());
+	// std::uniform_int_distribution<int> distribution(-50,50);
+	// for (int i = 0; i < 100; ++i)
+	// 	std::cout << (unsigned int) abs(distribution(gene)) << " ";
+
+	// std::pair<int,int> a(2,4);
+	// a = a/2;
+	// std::cout << a.first << " - " << a.second << std::endl;
+
+
+
+	// -------------------- TEST NOISEMAP --------------------
+	// float** noiseData = new float*[10];
+	// for(int i = 0; i < 10; ++i)
+	// 	noiseData[i] = new float[10];
+
+	// for (int y = 0; y < 10; y++)
+	// {
+	// 	for (int x = 0; x < 10; x++)
+	// 	{
+	// 		noiseData[x][y] = Landscape::noise.GetNoise((float) x+std::chrono::system_clock::now().time_since_epoch().count(), (float) y+std::chrono::system_clock::now().time_since_epoch().count());
+	// 		std::cout << noiseData[x][y] << " ";
+	// 	}
+	// 	std::cout << std::endl;
+	// }
+
+	// delete[] noiseData;
+
+	// -------------------- TEST LANDSCAPE --------------------
+	Landscape land(50);
+	land.print(std::cout);
 
 	return 0;
 }
