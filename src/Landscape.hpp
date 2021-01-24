@@ -23,9 +23,6 @@ private:
 	static unsigned int height_limit;
 	static FastNoiseLite noise;
 
-	// void diamond_step (Landscape *, std::vector<Point> *, std::uniform_int_distribution<int>, std::default_random_engine generator);
-	// void square_step (Landscape *, std::vector<Point> *, std::uniform_int_distribution<int>, std::default_random_engine generator);
-
 };
 
 #endif
