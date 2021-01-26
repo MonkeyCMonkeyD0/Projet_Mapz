@@ -13,8 +13,9 @@ public:
 	Labyrinth (const Labyrinth& labyrinth) : Surface(labyrinth) {}
 
 private:
-	unsigned int generate_labyrinth(const Point&);
+	void generate_labyrinth(const Point& start, const Point& end, bool vertical);
 	static unsigned int wall_height;
+	std::default_random_engine generator;
 
 };
 

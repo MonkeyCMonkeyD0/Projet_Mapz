@@ -19,11 +19,13 @@ public:
 	Point& operator+= (const Point&);
 	Point operator- (const Point&);
 	Point& operator-= (const Point&);
+	bool operator== (const Point&) const;
 
 	std::pair<std::size_t,std::size_t> get() const;
 	void set (const std::size_t, const std::size_t);
 	void set (const std::pair<std::size_t,std::size_t>);
 	void set (const Point&);
+	std::string toString() const;
 	std::ostream& print(std::ostream&) const;
 	double dist(const Point&) const;
 

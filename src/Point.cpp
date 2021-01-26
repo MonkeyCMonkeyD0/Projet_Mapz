@@ -56,6 +56,11 @@ Point& Point::operator-= (const Point& p)
 	return *this;
 }
 
+bool Point::operator== (const Point& p) const
+{
+	return this->get().first == p.get().first && this->get().second == p.get().second;
+}
+
 
 std::pair<std::size_t,std::size_t> Point::get() const
 {
@@ -77,12 +82,17 @@ void Point::set (const Point& p)
 	this->point = p.get();
 }
 
+std::string Point::toString() const
+{
+	return (std::string) ('(' + std::to_string(this->point.first) + ',' + std::to_string(this->point.second) + ')');
+}
+
 std::ostream& Point::print(std::ostream& out) const
 {
-	return out << '(' << this->point.first << ',' << this->point.second << ')';
+	return out << this->toString();
 }
 
 double Point::dist(const Point& p) const
 {
-	return sqrt(pow(p.get().first-this->get().first,2)+pow(p.get().second-this->get().second,2));
+	return (double) sqrt(pow( (long) (p.get().first - this->get().first), 2) + pow( (long) (p.get().second - this->get().second), 2));
 }
