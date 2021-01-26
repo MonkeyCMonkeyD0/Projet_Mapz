@@ -12,3 +12,7 @@ Labyrinth::Labyrinth (std::istream&)
 {
 	
 }
+unsigned int Labyrinth::generate_labyrinth(const Point&)
+{
+
+}

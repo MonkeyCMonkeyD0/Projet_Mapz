@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
 	// delete[] noiseData;
 
 	// -------------------- TEST LANDSCAPE --------------------
-	Landscape land(1000);
+	Landscape land(50);
 	land.print(std::cout);
 
 	return 0;

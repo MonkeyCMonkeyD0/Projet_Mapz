@@ -11,7 +11,6 @@ class Labyrinth : public Surface {
 public:
 	Labyrinth (const std::size_t nbC, const std::size_t nbL);
 	Labyrinth (const Labyrinth& labyrinth) : Surface(labyrinth) {}
-	Labyrinth (std::istream&);
 
 private:
 	unsigned int generate_labyrinth(const Point&);
