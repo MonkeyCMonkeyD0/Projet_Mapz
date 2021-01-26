@@ -1,12 +1,12 @@
 #include "Surface.hpp"
 
 
-unsigned int Surface::get_delta_height(const Point& p1, const Point& p2)
+unsigned int Surface::get_delta_height(const Point& p1, const Point& p2) const
 {
 	return abs((long) (*this)(p2) - (*this)(p1));
 }
 
-std::map<unsigned char, Point> Surface::get_neighbors (const Point& p)
+std::map<unsigned char, Point> Surface::get_neighbors (const Point& p) const
 {
 	size_t C = p.get().first, L = p.get().second;
 	std::map<unsigned char, Point> m;
@@ -35,7 +35,16 @@ std::map<unsigned char, Point> Surface::get_neighbors (const Point& p)
 	return m;
 }
 
-std::map<unsigned char, unsigned int> Surface::get_neighbors_value (const Point& p)
+std::map<unsigned char, Point> Surface::get_neighbors_filtered (const Point& p) const
+{
+	std::map<unsigned char, Point> neighbors;
+	for (auto it : this->get_neighbors(p))
+		if (this->get_delta_height(p,it.second) < this->max_delta_value)
+			neighbors[it.first] = it.second;
+	return neighbors;
+}
+
+std::map<unsigned char, unsigned int> Surface::get_neighbors_value (const Point& p) const
 {
 	std::map<unsigned char, Point> m = this->get_neighbors(p);
 	std::map<unsigned char, unsigned int> vals;

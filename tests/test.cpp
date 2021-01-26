@@ -2,6 +2,7 @@
 #include "../src/Grid.hpp"
 #include "../src/Surface.hpp"
 #include "../src/Landscape.hpp"
+#include "../src/Pathfinder.hpp"
 
 #include <random>
 #include <ctime>
@@ -66,8 +67,16 @@ int main(int argc, char const *argv[])
 	// delete[] noiseData;
 
 	// -------------------- TEST LANDSCAPE --------------------
-	Landscape land(1000);
-	land.print(std::cout);
+	Landscape land(1000,1000);
+	land.print(std::cout) << std::endl;
+
+	Pathfinder pf(&land, Point(1,1), Point(5,15));
+	bool isexec = pf.execute();
+
+	if (isexec)
+		for (auto i : pf.get_path())
+			i.print(std::cout) << " - ";
+	std::cout << std::endl;
 
 	return 0;
 }

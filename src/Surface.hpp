@@ -17,11 +17,12 @@ public:
 	Surface (const Surface& surface) : Grid<unsigned int>(surface) {}
 	Surface() : Grid<unsigned int>() {}
 
-// protected:
-	unsigned int get_delta_height(const Point&, const Point&);
-	std::map<unsigned char, Point> get_neighbors (const Point&);
-	std::map<unsigned char, unsigned int> get_neighbors_value (const Point&);
+	unsigned int get_delta_height(const Point&, const Point&) const;	
+	std::map<unsigned char, Point> get_neighbors (const Point&) const;
+	std::map<unsigned char, Point> get_neighbors_filtered (const Point&) const;
+	std::map<unsigned char, unsigned int> get_neighbors_value (const Point&) const;
 
+	unsigned int max_delta_value = 150;
 };
 
 #endif

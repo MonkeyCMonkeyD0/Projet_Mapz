@@ -15,7 +15,7 @@
 class Landscape : public Surface {
 
 public:
-	Landscape (const std::size_t size);
+	Landscape (const std::size_t, const std::size_t);
 	Landscape (const Landscape& landscape) : Surface(landscape) {}
 
 private:
