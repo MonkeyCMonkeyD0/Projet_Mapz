@@ -4,11 +4,10 @@
 #include "../src/Landscape.hpp"
 #include "../src/Maze.hpp"
 #include "../src/Pathfinder.hpp"
+#include "../src/GLFWMenu.hpp"
 
 #include <random>
 #include <ctime>
-
-#include <GLFW/glfw3.h>
 
 
 
@@ -90,39 +89,8 @@ int main(int argc, char const *argv[])
 	// maze.print(std::cout) << std::endl;
 
 
-	// -------------------- TEST GLFW --------------------
-	// void error_callback(int error, const char* description)
-	// {
-	// 	std::cout << "Error (" << error << ") : " << description << std::endl;
-	// 	return -1;
-	// }
-
-
-	// glfwSetErrorCallback(error_callback);
-
-	if (!glfwInit())
-	{
-		// Initialization failed
-		std::cout << "Error on init\n";
-		return -1;
-	}
-
-	GLFWwindow* window = glfwCreateWindow(1920, 1080, "MAPZ Window", NULL, NULL);
-	if (!window) {
-		// Window or OpenGL context creation failed
-		std::cout << "Error on creat window\n";
-		return -1;
-	}
-
-	while (!glfwWindowShouldClose(window))
-	{
-		// Keep running
-	}
-
-	glfwDestroyWindow(window);
-
-	glfwTerminate();
-
+	// -------------------- TEST GLFW Menu --------------------
+	GLFWMenu graphic_window;
 
 	return 0;
 }
