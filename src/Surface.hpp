@@ -16,6 +16,7 @@ public:
 	Surface (const unsigned int & val) : Grid<unsigned int>(val) {}
 	Surface (const Surface& surface) : Grid<unsigned int>(surface) {}
 	Surface() : Grid<unsigned int>() {}
+	virtual ~Surface() = 0;
 
 	unsigned int get_delta_height(const Point&, const Point&) const;	
 	std::map<unsigned char, Point> get_neighbors (const Point&) const;

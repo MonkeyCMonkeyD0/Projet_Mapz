@@ -3,6 +3,7 @@ CCFLAGS = -Wall -Werror -std=c++11 -g
 CFLAGS = -Iinclude/
 LDFLAGS = -Llib/
 LDFLAGS += -lglfw3
+FMFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 SRC_DIR = src
 OBJ_DIR = bin
@@ -21,7 +22,7 @@ testcase:
 	cd $(TST_DIR); make
 
 $(EXEC): $(OBJ)
-	$(CC) $(CCFLAGS) $(LDFLAGS) $^ -o $@
+	$(CC) $(CCFLAGS) $(CFLAGS) $(LDFLAGS) $(FMFLAGS) $^ -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)

@@ -3,6 +3,7 @@ CCFLAGS = -Wall -Werror -std=c++11 -g
 CFLAGS = -I../include/
 LDFLAGS = -L../lib/
 LDFLAGS += -lglfw3
+FMFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 SRC_DIR = ../src/
 OBJ_DIR = ../bin/
@@ -14,7 +15,7 @@ OBJ_TEST = $(filter-out $(OBJ_DIR)main.o, $(OBJ)) $(TST:%.cpp=%.o)
 
 
 testcase: $(OBJ_TEST)
-	$(CC) $(CCFLAGS) $(LDFLAGS) -o $@ $^
+	$(CC) $(CCFLAGS) $(CFLAGS) $(LDFLAGS) $(FMFLAGS) -o ../$@ $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CC) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
@@ -23,4 +24,4 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CC) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ_TEST) testcase
+	rm -f $(OBJ_TEST) ../testcase
