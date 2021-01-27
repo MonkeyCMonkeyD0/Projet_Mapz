@@ -2,6 +2,7 @@
 #include "../src/Grid.hpp"
 #include "../src/Surface.hpp"
 #include "../src/Landscape.hpp"
+#include "../src/Maze.hpp"
 #include "../src/Pathfinder.hpp"
 
 #include <random>
@@ -48,7 +49,6 @@ int main(int argc, char const *argv[])
 	// std::cout << a.first << " - " << a.second << std::endl;
 
 
-
 	// -------------------- TEST NOISEMAP --------------------
 	// float** noiseData = new float*[10];
 	// for(int i = 0; i < 10; ++i)
@@ -66,9 +66,11 @@ int main(int argc, char const *argv[])
 
 	// delete[] noiseData;
 
+
 	// -------------------- TEST LANDSCAPE --------------------
 	// Landscape land(50,50);
 	// land.print(std::cout) << std::endl;
+
 
 	// -------------------- TEST PATHFINDER --------------------
 	// Pathfinder pf(&land, Point(0,0), Point(17,48));
@@ -79,12 +81,15 @@ int main(int argc, char const *argv[])
 	// 		i.print(std::cout) << " - ";
 	// std::cout << std::endl;
 
+
 	// -------------------- TEST MAZE --------------------
-	Maze maze(10,10);
-	maze.print(std::cout) << std::endl;
+	// Maze maze(35,35);
+	// maze.print(std::cout) << std::endl;
+
 
 	// -------------------- TEST GLFW --------------------
 	
+
 
 	return 0;
 }

@@ -9,7 +9,8 @@ Landscape::Landscape (const std::size_t nbC, const std::size_t nbL) : Surface(nb
 	this->max_delta_value = 150;
 
 	std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-
+	std::uniform_int_distribution<int> distribution(INT_MIN,INT_MAX);
+	
 	Landscape::noise = FastNoiseLite(distribution(generator));
 	Landscape::noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
 	this->populate((unsigned int (*)(const Point&)) this->generate_landscape);

@@ -2,6 +2,8 @@
 #ifndef MAZE_HPP
 #define MAZE_HPP
 
+#include <random>
+
 #include "Point.hpp"
 #include "Surface.hpp"
 
