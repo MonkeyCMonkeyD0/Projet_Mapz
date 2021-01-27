@@ -1,6 +1,8 @@
 CC = g++
 CCFLAGS = -Wall -Werror -std=c++11 -g
-LIBFLAGS = 
+CFLAGS = -I../include/
+LDFLAGS = -L../lib/
+LDFLAGS += -lglfw3
 
 SRC_DIR = ../src/
 OBJ_DIR = ../bin/
@@ -12,13 +14,13 @@ OBJ_TEST = $(filter-out $(OBJ_DIR)main.o, $(OBJ)) $(TST:%.cpp=%.o)
 
 
 testcase: $(OBJ_TEST)
-	$(CC) $(CCFLAGS) $(LIBFLAGS) -o $@ $^
+	$(CC) $(CCFLAGS) $(LDFLAGS) -o $@ $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
-	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
+	$(CC) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 %.o: %.cpp
-	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
+	$(CC) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 clean:
 	rm -f $(OBJ_TEST) testcase

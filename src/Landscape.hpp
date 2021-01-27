@@ -6,7 +6,7 @@
 #include <random>
 #include <ctime>
 
-#include "FastNoiseLite.h"
+#include <FastNoiseLite/FastNoiseLite.h>
 
 #include "Point.hpp"
 #include "Surface.hpp"

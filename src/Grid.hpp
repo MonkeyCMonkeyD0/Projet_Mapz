@@ -11,8 +11,7 @@ template<typename T>
 class Grid {
 
 public:
-	// virtual Grid (const std::size_t nbC, const std::size_t nbL, const T&) = 0;
-	Grid (const std::size_t nbC, const std::size_t nbL, const T& elem);
+	Grid (const std::size_t, const std::size_t, const T&);
 	Grid (const std::size_t nbC, const std::size_t nbL) : Grid(nbC,nbL,T()) {}
 	Grid (const T& elem) : Grid(1000,1000,elem) {}
 	Grid (const Grid*);

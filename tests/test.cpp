@@ -67,16 +67,20 @@ int main(int argc, char const *argv[])
 	// delete[] noiseData;
 
 	// -------------------- TEST LANDSCAPE --------------------
-	Landscape land(1000,1000);
+	Landscape land(50,50);
 	land.print(std::cout) << std::endl;
 
-	Pathfinder pf(&land, Point(1,1), Point(5,15));
+	// -------------------- TEST PATHFINDER --------------------
+	Pathfinder pf(&land, Point(0,0), Point(17,48));
 	bool isexec = pf.execute();
 
 	if (isexec)
 		for (auto i : pf.get_path())
 			i.print(std::cout) << " - ";
 	std::cout << std::endl;
+
+	// -------------------- TEST GLFW --------------------
+	
 
 	return 0;
 }
