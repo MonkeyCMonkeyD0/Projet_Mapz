@@ -90,7 +90,8 @@ int main(int argc, char const *argv[])
 
 
 	// -------------------- TEST GLFW Menu --------------------
-	GLFWMenu graphic_window;
 
+	GLFWMenu graphic_menu;
+	
 	return 0;
 }

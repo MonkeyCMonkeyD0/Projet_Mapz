@@ -25,3 +25,8 @@ unsigned int Landscape::generate_landscape(const Point& p)
 
 	return (unsigned int) (value * Landscape::height_limit);
 }
+
+unsigned int Landscape::get_height_limit() const
+{
+	return Landscape::height_limit;
+}

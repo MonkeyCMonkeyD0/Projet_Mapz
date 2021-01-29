@@ -8,8 +8,6 @@ double GLFWMenu::mouse_pos[2] = {0,0};
 GLFWMenu::GLFWMenu()
 {
 	GLFWMenu::next_window = 0;
-	// GLFWimage icon[1];
-	// icon[0].pixels = SOIL_load_image("../data/gps-device.png", &icon[0].width, &icon[0].height, 0, SOIL_LOAD_RGBA);
 
 	if (!glfwInit()) {
 		// Initialization failed
@@ -40,11 +38,12 @@ GLFWMenu::GLFWMenu()
 	glfwSetCursorPosCallback(this->window, GLFWMenu::cursor_position_callback);
 	glfwSetMouseButtonCallback(this->window, GLFWMenu::mouse_button_callback);
 
+	// GLuint icon;
+	// glGenTextures(1, &icon);
+	// glBindTexture(GL_TEXTURE_2D, icon);
+	// glfwLoadTexture2D("data/img/gps-device.tga", GLFW_BUILD_MIPMAPS_BIT);
 	// glfwSetWindowIcon(this->window, 1, icon);
-	// SOIL_free_image_data(icon[0].pixels);
-
-	GLuint title = loadBMP("./data/img/LANDSCAPE-choix.bmp");
-
+	
 	this->onexe();
 }
 
@@ -64,12 +63,14 @@ void GLFWMenu::onexe()
 
 		glfwGetFramebufferSize(this->window, &width, &height);
 		glViewport(0, 0, width, height);
+		glEnable(GL_TEXTURE_2D);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();//load identity matrix
 
 		glColor3f(1,1,1);
 		glPointSize(15.0f);
-		// glTranslatef(-1,-1,-1);//move forward 4 units
+
+		// GLuint title = this->loadBMP("data/img/MAPZ-title.bmp"), ch_land = this->loadBMP("data/img/LANDSCAPE-choix.bmp"), ch_maze = this->loadBMP("data/img/MAZE-choix.bmp");
 
 		glBegin(GL_LINE_LOOP); //starts drawing of points
 			glVertex2f(-0.75,-0.5);
@@ -95,14 +96,37 @@ void GLFWMenu::onexe()
 		glEnd(); //end drawing of points
 
 		glBegin(GL_QUADS); //starts drawing of points
-			glVertex2f(-0.45,0.4);
-			glVertex2f(-0.45,0.8);
-			glVertex2f(0.45,0.8);
-			glVertex2f(0.45,0.4);
+			glVertex2f(-0.4,0.45);
+			glVertex2f(-0.4,0.75);
+			glVertex2f(0.4,0.75);
+			glVertex2f(0.4,0.45);
+			// glBindTexture(GL_TEXTURE_2D, title);
+		glEnd(); //end drawing of points
+
+		glBegin(GL_QUADS); //starts drawing of points
+			glVertex2f(-0.7,-0.45);
+			glVertex2f(-0.7,-0.05);
+			glVertex2f(-0.3,-0.05);
+			glVertex2f(-0.3,-0.45);
+			// glBindTexture(GL_TEXTURE_2D, ch_land);
+		glEnd(); //end drawing of points
+
+		glBegin(GL_QUADS); //starts drawing of points
+			glVertex2f(0.7,-0.45);
+			glVertex2f(0.7,-0.05);
+			glVertex2f(0.3,-0.05);
+			glVertex2f(0.3,-0.45);
+			// glBindTexture(GL_TEXTURE_2D, ch_maze);
 		glEnd(); //end drawing of points
 
 		glfwSwapBuffers(this->window);
 		glfwPollEvents();
+
+		// glDeleteTextures(1, &title);
+		// glDeleteTextures(1, &ch_land);
+		// glDeleteTextures(1, &ch_maze);
+
+		glDisable(GL_TEXTURE_2D);
 
 		if (GLFWMenu::onclick)
 			this->check_next_windows();
@@ -112,56 +136,61 @@ void GLFWMenu::onexe()
 }
 
 
-// GLuint GLFWMenu::loadBMP(const char * imagepath)
-// {
-// 	// Data read from the header of the BMP file
-// 	unsigned char header[54]; 	// Each BMP file begins by a 54-bytes header
-// 	unsigned int dataPos; 		// Position in the file where the actual data begins
-// 	unsigned int width, height;
-// 	unsigned int imageSize; 	// = width*height*3
-// 	// Actual RGB data
-// 	unsigned char * data;
+GLuint GLFWMenu::loadBMP(const char * imagepath)
+{
+	// Data read from the header of the BMP file
+	unsigned char header[54]; 	// Each BMP file begins by a 54-bytes header
+	unsigned int dataPos; 		// Position in the file where the actual data begins
+	unsigned int width, height;
+	unsigned int imageSize; 	// = width*height*3
+	// Actual RGB data
+	unsigned char * data;
 
-// 	// Open the file
-// 	FILE * file = fopen(imagepath,"rb");
-// 	if (!file) {
-// 		std::cerr << "Image could not be opened\n";
-// 		this->~GLFWMenu();
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (fread(header, 1, 54, file) != 54 || header[0] != 'B' || header[1] != 'M'){ // If not 54 bytes read : problem
-// 		std::cerr << "Not a correct BMP file\n";
-// 		this->~GLFWMenu();
-// 		exit(EXIT_FAILURE);
-// 	}
+	// Open the file
+	FILE * file = fopen(imagepath,"rb");
+	if (!file) {
+		std::cerr << "Image could not be opened\n";
+		this->~GLFWMenu();
+		exit(EXIT_FAILURE);
+	}
+	if (fread(header, 1, 54, file) != 54 || header[0] != 'B' || header[1] != 'M'){ // If not 54 bytes read : problem
+		std::cerr << "Not a correct BMP file\n";
+		this->~GLFWMenu();
+		exit(EXIT_FAILURE);
+	}
 
-// 	// Read ints from the byte array
-// 	dataPos = *(int*) &(header[0x0A]);
-// 	imageSize = *(int*) &(header[0x22]);
-// 	width = *(int*) &(header[0x12]);
-// 	height = *(int*) &(header[0x16]);
+	// Read ints from the byte array
+	dataPos = *(int*) &(header[0x0A]);
+	imageSize = *(int*) &(header[0x22]);
+	width = *(int*) &(header[0x12]);
+	height = *(int*) &(header[0x16]);
 
-// 	// Some BMP files are misformatted, guess missing information
-// 	if (imageSize==0) imageSize=width*height*3; 	// 3 : one byte for each Red, Green and Blue component
-// 	if (dataPos==0) dataPos=54; 	// The BMP header is done that way
+	// Some BMP files are misformatted, guess missing information
+	if (imageSize==0) imageSize=width*height*3; 	// 3 : one byte for each Red, Green and Blue component
+	if (dataPos==0) dataPos=54; 	// The BMP header is done that way
 
-// 	// Create a buffer
-// 	data = new unsigned char [imageSize];
-// 	// Read the actual data from the file into the buffer
-// 	fread(data,1,imageSize,file);
-// 	//Everything is in memory now, the file can be closed
-// 	fclose(file);
+	// Create a buffer
+	data = new unsigned char [imageSize];
+	// Read the actual data from the file into the buffer
+	fread(data,1,imageSize,file);
+	//Everything is in memory now, the file can be closed
+	fclose(file);
 
-// 	// Create one OpenGL texture
-// 	GLuint textureID;
-// 	glGenTextures(1, &textureID);
-// 	// "Bind" the newly created texture : all future texture functions will modify this texture
-// 	glBindTexture(GL_TEXTURE_2D, textureID);
-// 	// Give the image to OpenGL
-// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-// }
+	// Create one OpenGL texture
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	// "Bind" the newly created texture : all future texture functions will modify this texture
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	// Give the image to OpenGL
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	delete data;
+
+	return textureID;
+}
 
 void GLFWMenu::error_callback(int error, const char* description)
 {
@@ -181,8 +210,11 @@ void GLFWMenu::key_callback(GLFWwindow* window, int key, int scancode, int actio
 
 void GLFWMenu::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	GLFWMenu::mouse_pos[0] = xpos;
-	GLFWMenu::mouse_pos[1] = ypos;
+	int width, height;
+	glfwGetWindowSize(window, &width, &height);
+
+	GLFWMenu::mouse_pos[0] = 2*xpos/width - 1;
+	GLFWMenu::mouse_pos[1] = 1 - 2*ypos/height;
 }
 
 void GLFWMenu::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -193,11 +225,6 @@ void GLFWMenu::mouse_button_callback(GLFWwindow* window, int button, int action,
 
 void GLFWMenu::check_next_windows()
 {
-	int width, height;
-	glfwGetWindowSize(this->window, &width, &height);
-
-	GLFWMenu::mouse_pos[0] = 2*GLFWMenu::mouse_pos[0]/width - 1;
-	GLFWMenu::mouse_pos[1] = 1 - 2*GLFWMenu::mouse_pos[1]/height;
 	GLFWMenu::onclick = false;
 
 	// std::cout << "Mouse Position on click is : (" << GLFWMenu::mouse_pos[0] << ", " << GLFWMenu::mouse_pos[1] << ")" << std::endl;

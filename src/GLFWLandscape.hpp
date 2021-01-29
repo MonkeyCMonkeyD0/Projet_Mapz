@@ -1,23 +1,24 @@
 #pragma once
-#ifndef GLFWMENU_HPP
-#define GLFWMENU_HPP
+#ifndef GLFWLANDSCAPE_HPP
+#define GLFWLANDSCAPE_HPP
 
 #define GL_SILENCE_DEPRECATION
 
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cmath>
+
+#include "Landscape.hpp"
+#include "Pathfinder.hpp"
 
 
-class GLFWMenu {
+class GLFWLandscape {
 
 public:
-	GLFWMenu();
-	~GLFWMenu();
+	GLFWLandscape();
+	~GLFWLandscape();
 
-	static unsigned char get_next_window();
 	GLuint loadBMP(const char * imagepath);
-
-	static unsigned char next_window;
 
 private:
 	static void error_callback(int error, const char* description);
@@ -27,11 +28,18 @@ private:
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 	void onexe();
-	void check_next_windows();
+	Point ask_point(const char *);
+	void on_path_search();
+	double * rotation_transform(std::size_t, std::size_t);
+	double * rotation_transform(const Point& p);
 
-	GLFWwindow* window;
+	Landscape * land;
+	Pathfinder * pf;
+	GLFWwindow * window;
 	static double mouse_pos[2];
 	static bool onclick;
+	static bool pathtested;
+	static bool pathfound;
 
 };
 
