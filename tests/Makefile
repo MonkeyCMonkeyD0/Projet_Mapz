@@ -14,7 +14,7 @@ OBJ = $(SRC:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)
 OBJ_TEST = $(filter-out $(OBJ_DIR)main.o, $(OBJ)) $(TST:%.cpp=%.o)
 
 
-../testcase: $(OBJ_TEST)
+testcase: $(OBJ_TEST)
 	$(CC) $(CCFLAGS) $(CFLAGS) $(LDFLAGS) $(FMFLAGS) -o $@ $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
@@ -24,6 +24,6 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CC) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ_TEST) ../testcase
+	rm -f $(OBJ_TEST) testcase
 
 .PHONY: clean testcase
